@@ -4,3 +4,11 @@ server:
 spring:
   profiles:
     active: dev
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yml
+
+  jpa:
+    hibernate:
+      ddl-auto: none
