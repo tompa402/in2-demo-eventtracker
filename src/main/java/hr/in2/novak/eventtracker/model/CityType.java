@@ -11,6 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CityType extends BaseEntity {
 
-    private String code;
     private String name;
 }

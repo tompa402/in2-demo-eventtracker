@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrganisationUnit extends BaseEntity {
 
+    private String code;
     private String name;
     private String description;
     private OrganisationUnitType organisationUnitType;
