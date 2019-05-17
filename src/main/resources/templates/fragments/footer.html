@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<footer class="sticky-footer bg-white" th:fragment="footer-normaluser">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span th:text="'Copyrigth &copy; ' + ${#temporals.format(#temporals.createNow(), 'yyyy')}">Copyright &copy; 2019</span>
+            <span th:text="'EventTracker by TN ver ' + ${@environment.getProperty('app.version')}">EventTrackerApp by TN ver 1.0.0</span>
+        </div>
+    </div>
+</footer>
+
+<footer class="sticky-footer bg-white" th:fragment="footer-admin">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span th:text="'Copyrigth &copy; ' + ${#temporals.format(#temporals.createNow(), 'yyyy')}">Copyright &copy; 2019</span>
+            <span th:text="'EventTracker by TN ver ' + ${@environment.getProperty('app.version')} + ' AdminFooter'">EventTrackerApp by TN ver 1.0.0 AdminFooter</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

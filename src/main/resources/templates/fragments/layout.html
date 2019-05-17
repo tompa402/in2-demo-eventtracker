@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+</head>
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <div th:replace="fragments/navbar :: navbar"></div>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <div layout:fragment="content">
+                    <!-- ============================================================================ -->
+                    <!-- This content is only used for static prototyping purposes (natural templates)-->
+                    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+                    <!-- from "fragments/header.html" at runtime.                                     -->
+                    <!-- ============================================================================ -->
+                    <h1>Static content for prototyping purposes only</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+                        Phasellus et placerat elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+                        Phasellus et placerat elit.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer-normaluser"></div>
+    </div>
+</div>
+<div th:replace="fragments/components :: scroll-to-top"></div>
+</body>
+</html>
