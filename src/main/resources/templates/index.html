@@ -2,24 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/header :: header(~{::title},~{::link},~{})">
-    <title>Awesome - Main</title>
+    <title>Home</title>
     <link href="../static/css/style.css"
           th:href="@{~/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
+<!--<div th:replace="fragments/navbar :: navbar"></div>-->
 <header>
     <div id="intro" class="view">
         <div class="mask">
-            <div class="container-fluid d-flex align-items-center justify-content-center h-100">
-                <div class="row d-flex justify-content-center text-center text-white">
+            <div class="container-fluid d-flex align-items-center justify-content-center h-100 pt-5">
+                <div class="row d-flex justify-content-center text-center text-white custom-background pb-5">
                     <div class="col-md-10">
                         <h2 class="display-4 pt-5 mb-2">Event tracker</h2>
                         <hr class="hr-white">
                         <h4 class="my-4">This application is designed for demonstrative purposes that allows
                             users to search for events based on given criteria</h4>
                         <hr class="hr-white">
-                        <a th:href="@{~/flight-offer}" class="btn btn-outline-light">Continue<i
+                        <a th:href="@{~/event}" class="btn btn-outline-light">Continue<i
                                 class="fas fa-search-location ml-2"></i>
                         </a>
                     </div>

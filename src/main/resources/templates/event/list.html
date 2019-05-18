@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head th:replace="fragments/header :: header(~{::title},~{::link},~{::script})">
+    <title>Event - List</title>
+    <link href="../static/css/style.css"
+          th:href="@{~/css/style.css}" rel="stylesheet">
+
+    <script src="../static/js/custom.js"
+            th:src="@{~/js/custom.js}" defer></script>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="event-list-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-white">
+        <h1 class="display-4">Events</h1>
+        <p class="lead">This is list of all available events. </p>
+    </div>
+
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm" th:each="event : ${events}">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Event details</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title" th:text="*{event.name}">name
+                    <small class="text-muted"></small>
+                </h1>
+                <dl class="row">
+                    <dt class="col-sm-5">Start date</dt>
+                    <dd class="col-sm-7" th:text="*{event.start}">01.01.2019.</dd>
+
+                    <dt class="col-sm-5">End date</dt>
+                    <dd class="col-sm-7" th:text="*{event.end}">01.01.2019.</dd>
+
+                    <dt class="col-sm-5">Free Entry</dt>
+                    <dd class="col-sm-7" th:text="*{event.freeEntry}">Yes/No</dd>
+                </dl>
+
+                <div class="card-footer">
+                    <!--<div class="btn-group d-flex" role="group">-->
+                    <!--<a href="" class="btn btn-outline-primary w-100 mr-1">Details</a>-->
+                    <!--<a href="" class="btn btn-outline-primary w-100">Edit</a>-->
+                    <!--</div>-->
+                    <div class="row justify-content-center">
+                        <div class="col-sm-6">
+                            <a href="" class="btn btn-outline-primary w-100">Details</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="" class="btn btn-outline-primary w-100">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
