@@ -36,7 +36,7 @@ CREATE TABLE city(
 
 CREATE TABLE event(
     id          IDENTITY,
-    name        VARCHAR(256) NOT NULL,
+    name        VARCHAR(128) NOT NULL,
     start       TIMESTAMP,
     end         TIMESTAMP,
     free_entry  VARCHAR(2) DEFAULT 'NE',

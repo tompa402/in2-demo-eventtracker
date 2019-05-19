@@ -10,9 +10,9 @@
 
 <nav class="site-header py-1" th:fragment="navbar">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-block d-md-inline-block mx-auto" href="#">Tour</a>
-        <a class="py-2 d-block d-md-inline-block mx-auto" href="#">Product</a>
-        <a class="py-2 d-none d-md-inline-block mx-auto" href="#">Features</a>
+        <a class="py-2 d-block d-md-inline-block mx-auto" th:href="@{'~/event/'}">Event list</a>
+        <a class="py-2 d-block d-md-inline-block mx-auto" th:href="@{'~/event/search/'}">Event search</a>
+        <a class="py-2 d-none d-md-inline-block mx-auto" th:href="@{'~/login'}">Login</a>
     </div>
 </nav>
 

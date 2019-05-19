@@ -45,4 +45,6 @@ dependencies {
 	compile 'org.webjars:jquery-easing:1.4.1'
 	compile 'org.webjars:font-awesome:5.8.1'
 	compile 'org.webjars:datatables:1.10.19'
+	compile 'org.webjars:momentjs:2.24.0'
+	compile 'org.webjars:tempusdominus-bootstrap-4:5.1.2'
 }

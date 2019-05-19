@@ -10,6 +10,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +43,7 @@ public class EventController {
 
     @Secured({"ROLE_ADMIN"})
     @PostMapping("/new")
-    public String processEvent(Model model, @Valid Event event, Errors errors) {
+    public String processEvent(Model model, @Validated Event event, Errors errors) {
         log.info("Processing event: " + event);
         if (errors.hasErrors()) {
             log.info("Event object have errors. Saving canceled. Returning object with error to user.");
@@ -56,7 +57,7 @@ public class EventController {
         return "redirect:/event/" + event.getId();
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public String getAllEvents(Model model) {
         model.addAttribute("events", eventService.findAll());
         return "event/list";
@@ -76,15 +77,40 @@ public class EventController {
         return "event/eventDetails";
     }
 
+    @GetMapping("/edit/{eventId}")
+    public String editEvent(@PathVariable Long eventId, Model model){
+        Optional<Event> event = eventService.findById(eventId);
+        if (event.isPresent()) {
+            model.addAttribute("event", event.get());
+        } else {
+            return "redirect:/event/new";
+        }
+        model.addAttribute("cities", cityService.findAll());
+        return "event/eventForm";
+    }
+
+    @PostMapping("/edit/{eventId}")
+    public String processEventUpdate(@Valid Event event, Errors errors, Model model, @PathVariable Long eventId){
+        if(errors.hasErrors()){
+            model.addAttribute("event", event);
+            model.addAttribute("cities", cityService.findAll());
+            return "event/eventForm";
+        }
+        event.setCreatedBy("TESTING");
+        eventService.save(event);
+        return "redirect:/event/" + event.getId();
+    }
+
+
     @GetMapping("/search")
-    public String showEventSearchForm(Model model){
+    public String showEventSearchForm(Model model) {
         model.addAttribute("command", SearchCommand.builder().build());
         model.addAttribute("");
         return "event/searchEventForm";
     }
 
     @PostMapping("/search")
-    public String processSearchForm(Model model, SearchCommand command){
+    public String processSearchForm(Model model, SearchCommand command) {
         model.addAttribute("events", eventService.processCommand(command));
         return "event/list";
     }

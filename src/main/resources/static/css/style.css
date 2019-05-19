@@ -42,6 +42,10 @@ body {
     padding: 0;
 }
 
+.form-field-error {
+    border: 1px solid red;
+}
+
 #searchForm, #name-div, #start-date-div, #end-date-div, #free-entry-div, #location-div {
     display: none;
 }

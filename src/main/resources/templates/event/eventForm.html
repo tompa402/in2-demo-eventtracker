@@ -8,6 +8,15 @@
     <link href="../static/css/style.css"
           th:href="@{~/css/style.css}" rel="stylesheet">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"
+          th:href="@{~/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.css}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+            th:src="@{~/webjars/momentjs/2.24.0/min/moment-with-locales.min.js}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"
+            th:src="@{~/webjars/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.js}"></script>
+
     <script src="../static/js/custom.js"
             th:src="@{~/js/custom.js}" defer></script>
 </head>
@@ -24,35 +33,29 @@
                                 <hr class="mb-4">
                             </div>
 
-                            <form class="needs-validation" th:action="@{~/event/new}" method="post"
-                                  th:object="${event}" novalidate>
+                            <form class="needs-validation" method="post" th:object="${event}" novalidate>
                                 <div class="mb-3">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="" th:field="*{name}"
+                                    <input type="text" class="form-control" th:errorclass="form-field-error" id="name" placeholder="" th:field="*{name}"
                                            required>
-                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
-                                         th:errors="*{name}">
-                                        Valid name is required.
-                                    </div>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('name')}"
+                                          th:errors="*{name}">Name error</span>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="startDate">Start Date</label>
-                                        <input type="datetime-local" class="form-control" id="startDate" placeholder="" value=""
-                                               th:field="*{start}" required>
-                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
-                                             th:errors="*{name}">
-                                            Valid event start date is required.
-                                        </div>
+                                        <input type="text" class="form-control datetimepicker-input" th:errorclass="form-field-error" id="startDate"
+                                               th:field="*{start}" data-toggle="datetimepicker" data-target="#startDate" required>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('start')}"
+                                              th:errors="*{start}">Start date error</span>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="endDate">End Date</label>
-                                        <input type="datetime-local" class="form-control" id="endDate" placeholder="" value=""
-                                               th:field="*{end}" required>
-                                        <div class="invalid-feedback">
-                                            Valid event end date is required.
-                                        </div>
+                                        <input type="text" class="form-control datetimepicker-input" th:errorclass="form-field-error" id="endDate"
+                                               th:field="*{end}" data-toggle="datetimepicker" data-target="#endDate" required>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('end')}"
+                                              th:errors="*{end}">End date error</span>
                                     </div>
                                 </div>
 
@@ -60,22 +63,21 @@
                                     <label for="city">City</label>
                                     <select class="custom-select d-block w-100" id="city" th:field="*{city.id}"
                                             required>
-                                        <option value="">Choose...</option>
                                         <option th:each="city : ${cities}"
                                                 th:value="${city.id}"
                                                 th:text="${city.name}">
                                         </option>
                                     </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid city.
-                                    </div>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('city')}"
+                                          th:errors="*{city}">City selection error</span>
                                 </div>
 
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="freeEntry" value="DA" th:field="*{freeEntry}">
+                                    <input type="checkbox" class="custom-control-input" id="freeEntry" th:field="*{freeEntry}" th:value="'DA'" >
                                     <label class="custom-control-label" for="freeEntry">Slobodan ulaz?</label>
                                 </div>
                                 <hr class="mb-4">
+                                <input type="hidden" name="expenseId" th:value="${event.id}" />
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Save event
                                 </button>
                             </form>

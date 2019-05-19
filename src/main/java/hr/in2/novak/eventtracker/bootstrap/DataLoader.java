@@ -51,7 +51,7 @@ public class DataLoader implements CommandLineRunner {
         List<City> cities = cityService.findAll();
         List<Event> events = new ArrayList<>();
 
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             events.add(Event.builder()
                     .name(randomEventNames != null ? randomEventNames.get(i) : "randomName" + i)
                     .start(LocalDateTime.now().plusDays(i))

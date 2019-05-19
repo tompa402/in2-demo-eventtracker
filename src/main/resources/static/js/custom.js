@@ -36,3 +36,43 @@ $("#search-option").on('change', function () {
         }
     });
 });
+
+$.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+    // icons: {
+    //     time: 'far fa-clock',
+    //     date: 'far fa-calendar',
+    //     up: 'far fa-arrow-up',
+    //     down: 'far fa-arrow-down',
+    //     previous: 'far fa-chevron-left',
+    //     next: 'far fa-chevron-right',
+    //     today: 'far fa-calendar-check-o',
+    //     clear: 'far fa-trash',
+    //     close: 'far fa-times'
+    // }
+    locale: 'hr'
+});
+$( document ).ready(function() {
+    var startDateSelector = $('#startDate');
+    var endDateSelector = $('#endDate');
+
+    var start = moment(startDateSelector.val(), 'dd.mm.yyyy hh:mm a').toDate();
+    var end = moment(endDateSelector.val(), 'dd.mm.yyyy hh:mm a').toDate();
+
+    startDateSelector.datetimepicker({
+        date: start,
+        sideBySide: true
+    });
+    endDateSelector.datetimepicker({
+        date: end,
+        useCurrent: false,
+        sideBySide: true
+    });
+
+    startDateSelector.on("change.datetimepicker", function (e) {
+        $('#endDate').datetimepicker('minDate', e.date);
+    });
+    endDateSelector.on("change.datetimepicker", function (e) {
+        $('#startDate').datetimepicker('maxDate', e.date);
+    });
+});
+

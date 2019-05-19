@@ -12,40 +12,42 @@
             th:src="@{~/js/custom.js}" defer></script>
 </head>
 <body>
-<div class="card-deck mb-3 text-center" layout:fragment="content">
-    <div class="card mb-4 shadow-sm" th:object="${event}">
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Event details</h4>
-        </div>
-        <div class="card-body">
-            <h1 class="card-title pricing-card-title" th:text="*{name}">name
-                <small class="text-muted"></small>
-            </h1>
-            <dl class="row">
-                <dt class="col-sm-5">Start date</dt>
-                <dd class="col-sm-7" th:text="*{start}">01.01.2019.</dd>
+<div class="row justify-content-center" layout:fragment="content">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-4">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Event details</h1>
+                                <hr class="mb-4">
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title" th:text="*{event.name}">name
+                                    <small class="text-muted"></small>
+                                </h1>
+                                <dl class="row">
+                                    <dt class="col-sm-5">Start date</dt>
+                                    <dd class="col-sm-7" th:text="*{#temporals.format(event.start,'dd.mm.yyyy HH:mm')}">01.01.2019.</dd>
 
-                <dt class="col-sm-5">End date</dt>
-                <dd class="col-sm-7" th:text="*{end}">01.01.2019.</dd>
+                                    <dt class="col-sm-5">End date</dt>
+                                    <dd class="col-sm-7" th:text="*{#temporals.format(event.end,'dd.mm.yyyy HH:mm')}">01.01.2019.</dd>
 
-                <dt class="col-sm-5">Free Entry</dt>
-                <dd class="col-sm-7" th:text="*{freeEntry}">Yes/No</dd>
-            </dl>
-
-            <div class="card-footer">
-                <!--<div class="btn-group d-flex" role="group">-->
-                <!--<a href="" class="btn btn-outline-primary w-100 mr-1">Details</a>-->
-                <!--<a href="" class="btn btn-outline-primary w-100">Edit</a>-->
-                <!--</div>-->
-                <div class="row justify-content-center">
-                    <div class="col-sm-6">
-                        <a href="" class="btn btn-outline-primary w-100">Edit</a>
+                                    <dt class="col-sm-5">Free Entry</dt>
+                                    <dd class="col-sm-7" th:text="*{event.freeEntry}">Yes/No</dd>
+                                </dl>
+                            </div>
+                            <hr class="mb-4">
+                            <a th:href="@{'~/event/edit/' + ${event.id}}" class="btn btn-outline-primary w-100">Edit</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 </body>
 </html>
