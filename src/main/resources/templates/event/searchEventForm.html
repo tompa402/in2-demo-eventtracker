@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head th:replace="fragments/header :: header(~{::title},~{::link},~{::script})">
+    <title>Event - New</title>
+    <link href="../static/css/style.css"
+          th:href="@{~/css/style.css}" rel="stylesheet">
+
+    <script src="../static/js/custom.js"
+            th:src="@{~/js/custom.js}" defer></script>
+</head>
+<body>
+<div class="row justify-content-center" layout:fragment="content">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-4">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Search event</h1>
+                                <div class="mb-3">
+                                    <select class="custom-select d-block w-100" id="search-option"
+                                            required>
+                                        <option value="">Select search option</option>
+                                        <option value="name-div">by Name</option>
+                                        <option value="start-date-div">by Start Date</option>
+                                        <option value="end-date-div">by End Date</option>
+                                        <option value="free-entry-div">by Free Entry</option>
+                                        <option value="location-div">by Location</option>
+                                    </select>
+                                </div>
+                                <hr class="mb-4">
+                            </div>
+
+                            <form id="searchForm" class="needs-validation" th:action="@{~/event/search}" method="post"
+                                  th:object="${command}" novalidate>
+                                <div id="name-div" class="mb-3">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder=""
+                                           th:field="*{name}"
+                                           required>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                                         th:errors="*{name}">
+                                        Valid name is required.
+                                    </div>
+                                </div>
+
+                                <div id="start-date-div" class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fromStartDate">From Start Date</label>
+                                        <input type="datetime-local" class="form-control" id="fromStartDate"
+                                               placeholder="" value=""
+                                               th:field="*{fromStartDate}" required>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fromStartDate')}"
+                                             th:errors="*{fromStartDate}">
+                                            Valid event start date is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="toStartDate">To Start Date</label>
+                                        <input type="datetime-local" class="form-control" id="toStartDate"
+                                               placeholder="" value=""
+                                               th:field="*{toStartDate}" required>
+                                        <div class="invalid-feedback">
+                                            Valid event end date is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="end-date-div" class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fromEndDate">From End Date</label>
+                                        <input type="datetime-local" class="form-control" id="fromEndDate"
+                                               placeholder="" value=""
+                                               th:field="*{fromEndDate}" required>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fromEndDate')}"
+                                             th:errors="*{fromEndDate}">
+                                            Valid event start date is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="toEndDate">To End Date</label>
+                                        <input type="datetime-local" class="form-control" id="toEndDate"
+                                               placeholder="" value=""
+                                               th:field="*{toEndDate}" required>
+                                        <div class="invalid-feedback">
+                                            Valid event end date is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="free-entry-div" class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="freeEntry"
+                                           value="DA" th:field="*{freeEntry}">
+                                    <label class="custom-control-label" for="freeEntry">Slobodan ulaz?</label>
+                                </div>
+
+                                <div id="location-div">
+                                    LOCATION INPUT
+                                </div>
+
+                                <!--<div class="mb-3">-->
+                                <!--<label for="city">City</label>-->
+                                <!--<select class="custom-select d-block w-100" id="city" th:field="*{city.id}"-->
+                                <!--required>-->
+                                <!--<option value="">Choose...</option>-->
+                                <!--<option th:each="city : ${cities}"-->
+                                <!--th:value="${city.id}"-->
+                                <!--th:text="${city.name}">-->
+                                <!--</option>-->
+                                <!--</select>-->
+                                <!--<div class="invalid-feedback">-->
+                                <!--Please select a valid city.-->
+                                <!--</div>-->
+                                <!--</div>-->
+
+
+                                <hr class="mb-4">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Search events
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

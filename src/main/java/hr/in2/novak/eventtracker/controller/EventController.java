@@ -1,5 +1,6 @@
 package hr.in2.novak.eventtracker.controller;
 
+import hr.in2.novak.eventtracker.command.SearchCommand;
 import hr.in2.novak.eventtracker.model.Event;
 import hr.in2.novak.eventtracker.service.CityService;
 import hr.in2.novak.eventtracker.service.EventService;
@@ -34,7 +35,7 @@ public class EventController {
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/new")
     public String showEventForm(Model model) {
-        model.addAttribute("event", new Event());
+        model.addAttribute("event", Event.builder().build());
         model.addAttribute("cities", cityService.findAll());
         return "event/eventForm";
     }
@@ -73,5 +74,18 @@ public class EventController {
                     .build());
         }
         return "event/eventDetails";
+    }
+
+    @GetMapping("/search")
+    public String showEventSearchForm(Model model){
+        model.addAttribute("command", SearchCommand.builder().build());
+        model.addAttribute("");
+        return "event/searchEventForm";
+    }
+
+    @PostMapping("/search")
+    public String processSearchForm(Model model, SearchCommand command){
+        model.addAttribute("events", eventService.processCommand(command));
+        return "event/list";
     }
 }

@@ -42,6 +42,10 @@ body {
     padding: 0;
 }
 
+#searchForm, #name-div, #start-date-div, #end-date-div, #free-entry-div, #location-div {
+    display: none;
+}
+
 .site-header {
     background-color: rgba(0, 0, 0, .85);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
