@@ -24,4 +24,8 @@ public class OrganisationUnit extends BaseEntity {
     @JoinColumn(name = "org_unit_type_id")
     private OrganisationUnitType organisationUnitType;
     private boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private OrganisationUnit organisationUnit;
 }

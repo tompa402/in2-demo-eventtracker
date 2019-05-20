@@ -20,6 +20,164 @@
     });
 })(jQuery);
 
+$("#region").on('change', function () {
+    var selected;
+    selected = $(this).val();
+
+    var body = {
+        ids : selected
+    };
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/api/v1/organisation-unit",
+        data: JSON.stringify(body),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var countySelector= $('#county');
+
+            countySelector.empty();
+            $.each(data,function(i,obj)
+            {
+                $("<option />",{
+                    val: obj.id,
+                    text: obj.name
+                }).appendTo(countySelector);
+            });
+            countySelector.selectpicker('refresh');
+            console.log("SUCCESS : ", data);
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+});
+
+$("#region").on('change', function () {
+    var selected;
+    selected = $(this).val();
+
+    var body = {
+        ids : selected
+    };
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/api/v1/organisation-unit",
+        data: JSON.stringify(body),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var countySelector= $('#county');
+
+            countySelector.empty();
+            $.each(data,function(i,obj)
+            {
+                $("<option />",{
+                    val: obj.id,
+                    text: obj.name
+                }).appendTo(countySelector);
+            });
+            countySelector.selectpicker('refresh');
+            console.log("SUCCESS : ", data);
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+});
+
+$("#county").on('change', function () {
+    var selected;
+    selected = $(this).val();
+
+    var body = {
+        ids : selected
+    };
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/api/v1/city",
+        data: JSON.stringify(body),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var citySelector= $('#city');
+
+            citySelector.empty();
+            $.each(data,function(i,obj)
+            {
+                $("<option />",{
+                    val: obj.id,
+                    text: obj.name
+                }).appendTo(citySelector);
+            });
+            citySelector.selectpicker('refresh');
+            console.log("SUCCESS : ", data);
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+});
+
+$("#citySize").on('change', function () {
+    var selected;
+    selected = $(this).val();
+
+    var selectedCounties = $('#county').val();
+
+    var body = {
+        ids : selectedCounties,
+        sizeIds: selected
+
+
+    };
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/api/v1/city/by-size-and-county",
+        data: JSON.stringify(body),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var citySelector= $('#city');
+
+            citySelector.empty();
+            $.each(data,function(i,obj)
+            {
+                $("<option />",{
+                    val: obj.id,
+                    text: obj.name
+                }).appendTo(citySelector);
+            });
+            citySelector.selectpicker('refresh');
+            console.log("SUCCESS : ", data);
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+});
+
+
+$("#reset-button").click(function (e) {
+    $('#region').selectpicker('refresh');
+    $('#county').selectpicker('refresh');
+    $('#citySize').selectpicker('refresh');
+    $('#city').selectpicker('refresh');
+});
+
+
 $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
     // icons: {
     //     time: 'far fa-clock',

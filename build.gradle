@@ -47,4 +47,5 @@ dependencies {
 	compile 'org.webjars:datatables:1.10.19'
 	compile 'org.webjars:momentjs:2.24.0'
 	compile 'org.webjars:tempusdominus-bootstrap-4:5.1.2'
+	compile 'org.webjars:bootstrap-select:1.13.8'
 }

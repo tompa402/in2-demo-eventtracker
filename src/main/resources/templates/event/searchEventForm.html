@@ -11,6 +11,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"
           th:href="@{~/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.css}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.8/dist/css/bootstrap-select.min.css"
+          th:src="@{~/webjars/bootstrap-select/1.13.8/css/bootstrap-select.min.css}" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.8/dist/js/bootstrap-select.min.js"
+            th:src="@{~/webjars/bootstrap-select/1.13.8/js/bootstrap-select.min.js}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
             th:src="@{~/webjars/momentjs/2.24.0/min/moment-with-locales.min.js}"></script>
 
@@ -30,17 +37,6 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Search event</h1>
-                                <div class="mb-3">
-                                    <select class="custom-select d-block w-100" id="search-option"
-                                            required>
-                                        <option value="">Select search option</option>
-                                        <option value="name-div">by Name</option>
-                                        <option value="start-date-div">by Start Date</option>
-                                        <option value="end-date-div">by End Date</option>
-                                        <option value="free-entry-div">by Free Entry</option>
-                                        <option value="location-div">by Location</option>
-                                    </select>
-                                </div>
                                 <hr class="mb-4">
                             </div>
 
@@ -62,7 +58,8 @@
                                         <label for="fromStartDate">From Start Date</label>
                                         <input type="text" class="form-control datetimepicker-input" id="fromStartDate"
                                                placeholder="" value=""
-                                               th:field="*{fromStartDate}" data-toggle="datetimepicker" data-target="#fromStartDate" required>
+                                               th:field="*{fromStartDate}" data-toggle="datetimepicker"
+                                               data-target="#fromStartDate" required>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fromStartDate')}"
                                              th:errors="*{fromStartDate}">
                                             Valid event start date is required.
@@ -72,7 +69,8 @@
                                         <label for="toStartDate">To Start Date</label>
                                         <input type="text" class="form-control datetimepicker-input" id="toStartDate"
                                                placeholder="" value=""
-                                               th:field="*{toStartDate}" data-toggle="datetimepicker" data-target="#toStartDate" required>
+                                               th:field="*{toStartDate}" data-toggle="datetimepicker"
+                                               data-target="#toStartDate" required>
                                         <div class="invalid-feedback">
                                             Valid event end date is required.
                                         </div>
@@ -84,7 +82,8 @@
                                         <label for="fromEndDate">From End Date</label>
                                         <input type="text" class="form-control datetimepicker-input" id="fromEndDate"
                                                placeholder="" value=""
-                                               th:field="*{fromEndDate}" data-toggle="datetimepicker" data-target="#fromEndDate" required>
+                                               th:field="*{fromEndDate}" data-toggle="datetimepicker"
+                                               data-target="#fromEndDate" required>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fromEndDate')}"
                                              th:errors="*{fromEndDate}">
                                             Valid event start date is required.
@@ -94,42 +93,76 @@
                                         <label for="toEndDate">To End Date</label>
                                         <input type="text" class="form-control datetimepicker-input" id="toEndDate"
                                                placeholder="" value=""
-                                               th:field="*{toEndDate}" data-toggle="datetimepicker" data-target="#toEndDate" required>
+                                               th:field="*{toEndDate}" data-toggle="datetimepicker"
+                                               data-target="#toEndDate" required>
                                         <div class="invalid-feedback">
                                             Valid event end date is required.
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="free-entry-div" class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="freeEntry"
-                                           th:value="'DA'" th:field="*{freeEntry}">
-                                    <label class="custom-control-label" for="freeEntry">Slobodan ulaz?</label>
+                                <div class="mb-3">
+                                    <div id="free-entry-div" class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="freeEntry"
+                                               th:value="'DA'" th:field="*{freeEntry}">
+                                        <label class="custom-control-label" for="freeEntry">Free entry?</label>
+                                    </div>
                                 </div>
 
-                                <div id="location-div">
-                                    LOCATION INPUT
+                                <div class="mb-3">
+                                    <label for="region">Region</label>
+                                    <select class="d-block w-100 selectpicker" id="region" th:field="*{selectedOrg}"
+                                            required multiple>
+                                        <option th:each="region : ${regions}"
+                                                th:value="${region.id}"
+                                                th:text="${region.name}">
+                                        </option>
+                                    </select>
                                 </div>
 
-                                <!--<div class="mb-3">-->
-                                <!--<label for="city">City</label>-->
-                                <!--<select class="custom-select d-block w-100" id="city" th:field="*{city.id}"-->
-                                <!--required>-->
-                                <!--<option value="">Choose...</option>-->
-                                <!--<option th:each="city : ${cities}"-->
-                                <!--th:value="${city.id}"-->
-                                <!--th:text="${city.name}">-->
-                                <!--</option>-->
-                                <!--</select>-->
-                                <!--<div class="invalid-feedback">-->
-                                <!--Please select a valid city.-->
-                                <!--</div>-->
-                                <!--</div>-->
+                                <div class="mb-3">
+                                    <label for="county">County</label>
+                                    <select class="d-block w-100 selectpicker" id="county" th:field="*{selectedSubOrg}"
+                                            required multiple>
+                                        <option th:each="county : ${counties}"
+                                                th:value="${county.id}"
+                                                th:text="${county.name}">
+                                        </option>
+                                    </select>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label for="citySize">City size</label>
+                                    <select class="d-block w-100 selectpicker" id="citySize"
+                                            th:field="*{selectedCityTypes}"
+                                            required multiple>
+                                        <option th:each="cityType : ${cityTypes}"
+                                                th:value="${cityType.id}"
+                                                th:text="${cityType.name}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="city">City</label>
+                                    <select class="d-block w-100 selectpicker" id="city" th:field="*{selectedCities}"
+                                            required multiple>
+                                        <option th:each="city : ${cities}"
+                                                th:value="${city.id}"
+                                                th:text="${city.name}">
+                                        </option>
+                                    </select>
+                                </div>
 
                                 <hr class="mb-4">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Search events
-                                </button>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                                    <div class="col-lg-9">
+                                        <input id="reset-button" type="reset" class="btn btn-secondary"
+                                               value="Reset form">
+                                        <input type="submit" class="btn btn-primary" value="Search events">
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

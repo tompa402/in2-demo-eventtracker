@@ -4,6 +4,7 @@ import hr.in2.novak.eventtracker.command.SearchCommand;
 import hr.in2.novak.eventtracker.model.Event;
 import hr.in2.novak.eventtracker.service.CityService;
 import hr.in2.novak.eventtracker.service.EventService;
+import hr.in2.novak.eventtracker.service.OrganisationUnitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -26,11 +27,13 @@ public class EventController {
 
     private final EventService eventService;
     private final CityService cityService;
+    private final OrganisationUnitService organisationUnitService;
 
     @Autowired
-    public EventController(EventService eventService, CityService cityService) {
+    public EventController(EventService eventService, CityService cityService, OrganisationUnitService unitService) {
         this.eventService = eventService;
         this.cityService = cityService;
+        this.organisationUnitService = unitService;
     }
 
     @Secured({"ROLE_ADMIN"})
@@ -78,7 +81,7 @@ public class EventController {
     }
 
     @GetMapping("/edit/{eventId}")
-    public String editEvent(@PathVariable Long eventId, Model model){
+    public String editEvent(@PathVariable Long eventId, Model model) {
         Optional<Event> event = eventService.findById(eventId);
         if (event.isPresent()) {
             model.addAttribute("event", event.get());
@@ -90,8 +93,8 @@ public class EventController {
     }
 
     @PostMapping("/edit/{eventId}")
-    public String processEventUpdate(@Valid Event event, Errors errors, Model model, @PathVariable Long eventId){
-        if(errors.hasErrors()){
+    public String processEventUpdate(@Valid Event event, Errors errors, Model model, @PathVariable Long eventId) {
+        if (errors.hasErrors()) {
             model.addAttribute("event", event);
             model.addAttribute("cities", cityService.findAll());
             return "event/eventForm";
@@ -105,7 +108,10 @@ public class EventController {
     @GetMapping("/search")
     public String showEventSearchForm(Model model) {
         model.addAttribute("command", SearchCommand.builder().build());
-        model.addAttribute("");
+        model.addAttribute("regions", organisationUnitService.findAllRegions());
+        model.addAttribute("counties", organisationUnitService.findAllCounties());
+        model.addAttribute("cityTypes", cityService.findAllCityTypes());
+        model.addAttribute("cities", cityService.findAll());
         return "event/searchEventForm";
     }
 
