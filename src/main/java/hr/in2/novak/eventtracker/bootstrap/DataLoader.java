@@ -54,8 +54,8 @@ public class DataLoader implements CommandLineRunner {
         for (int i = 1; i <= 100; i++) {
             events.add(Event.builder()
                     .name(randomEventNames != null ? randomEventNames.get(i) : "randomName" + i)
-                    .start(LocalDateTime.now().plusDays(i))
-                    .end(LocalDateTime.now().plusDays(i))
+                    .start(LocalDateTime.now().plusDays(i+1))
+                    .end(LocalDateTime.now().plusDays(i+2))
                     .freeEntry(YesNoEnum.values()[new Random().nextInt(YesNoEnum.values().length)])
                     .city(cities.get(new Random().nextInt(cities.size())))
                     .createdBy("default")
