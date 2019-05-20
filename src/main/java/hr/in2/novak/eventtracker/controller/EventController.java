@@ -54,7 +54,6 @@ public class EventController {
             model.addAttribute("cities", cityService.findAll());
             return "event/eventForm";
         }
-        event.setCreatedBy("TESTING");
         eventService.save(event);
         log.info("Event saved successfully. Event Id:" + event.getId());
         return "redirect:/event/" + event.getId();
@@ -101,7 +100,6 @@ public class EventController {
             model.addAttribute("cities", cityService.findAll());
             return "event/eventForm";
         }
-        event.setId(eventId);
         eventService.save(event);
         return "redirect:/event/" + event.getId();
     }

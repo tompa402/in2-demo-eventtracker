@@ -34,7 +34,7 @@
                             </div>
 
                             <form class="needs-validation" method="post" th:object="${event}" novalidate>
-                                <input type="hidden" name="expenseId" th:value="*{id}" />
+                                <input type="hidden" name="id" th:field="*{id}" th:value="*{id}" />
                                 <div class="mb-3">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" th:errorclass="form-field-error" id="name" placeholder="" th:field="*{name}"

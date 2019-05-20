@@ -9,8 +9,10 @@ import hr.in2.novak.eventtracker.repository.specification.EventSpecification;
 import hr.in2.novak.eventtracker.util.AuthenticationFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +55,12 @@ public class EventService {
 
     public List<Event> findByCriteria(SearchCommand command) {
         return eventRepository.findAll(EventSpecification.findByCriteria(command));
+    }
+
+    @Scheduled(cron = "0 5 1 * * ?", zone = "CET")
+    private void deleteOldData() {
+        log.info("Creating new task that will clean old values from database.");
+        eventRepository.deleteInBatch(eventRepository.findByEndLessThanEqual(LocalDateTime.now().minusDays(1L)));
+        log.info("Job done.");
     }
 }
