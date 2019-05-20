@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout}">
 
@@ -29,17 +30,18 @@
                                 </h1>
                                 <dl class="row">
                                     <dt class="col-sm-5">Start date</dt>
-                                    <dd class="col-sm-7" th:text="*{#temporals.format(event.start,'dd.mm.yyyy HH:mm')}">01.01.2019.</dd>
+                                    <dd class="col-sm-7" th:text="*{#temporals.format(event.start,'dd.MM.yyyy H:mm')}">01.01.2019.</dd>
 
                                     <dt class="col-sm-5">End date</dt>
-                                    <dd class="col-sm-7" th:text="*{#temporals.format(event.end,'dd.mm.yyyy HH:mm')}">01.01.2019.</dd>
+                                    <dd class="col-sm-7" th:text="*{#temporals.format(event.end,'dd.MM.yyyy H:mm')}">01.01.2019.</dd>
 
                                     <dt class="col-sm-5">Free Entry</dt>
                                     <dd class="col-sm-7" th:text="*{event.freeEntry}">Yes/No</dd>
                                 </dl>
                             </div>
                             <hr class="mb-4">
-                            <a th:href="@{'~/event/edit/' + ${event.id}}" class="btn btn-outline-primary w-100">Edit</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{'~/event/edit/' + ${event.id}}" class="btn btn-outline-primary w-100">Edit</a>
+                            <a sec:authorize="isAnonymous()" class="btn btn-outline-primary w-100" th:href="@{'~/event'}">Event list</a>
                         </div>
                     </div>
                 </div>

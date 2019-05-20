@@ -34,6 +34,7 @@
                             </div>
 
                             <form class="needs-validation" method="post" th:object="${event}" novalidate>
+                                <input type="hidden" name="expenseId" th:value="*{id}" />
                                 <div class="mb-3">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" th:errorclass="form-field-error" id="name" placeholder="" th:field="*{name}"
@@ -77,7 +78,8 @@
                                     <label class="custom-control-label" for="freeEntry">Slobodan ulaz?</label>
                                 </div>
                                 <hr class="mb-4">
-                                <input type="hidden" name="expenseId" th:value="${event.id}" />
+                                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Save event
                                 </button>
                             </form>

@@ -80,6 +80,7 @@ public class EventController {
         return "event/eventDetails";
     }
 
+    @Secured({"ROLE_ADMIN"})
     @GetMapping("/edit/{eventId}")
     public String editEvent(@PathVariable Long eventId, Model model) {
         Optional<Event> event = eventService.findById(eventId);
@@ -92,6 +93,7 @@ public class EventController {
         return "event/eventForm";
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping("/edit/{eventId}")
     public String processEventUpdate(@Valid Event event, Errors errors, Model model, @PathVariable Long eventId) {
         if (errors.hasErrors()) {
@@ -99,7 +101,7 @@ public class EventController {
             model.addAttribute("cities", cityService.findAll());
             return "event/eventForm";
         }
-        event.setCreatedBy("TESTING");
+        event.setId(eventId);
         eventService.save(event);
         return "redirect:/event/" + event.getId();
     }
