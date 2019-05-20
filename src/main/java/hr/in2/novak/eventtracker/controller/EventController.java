@@ -111,7 +111,7 @@ public class EventController {
 
     @PostMapping("/search")
     public String processSearchForm(Model model, SearchCommand command) {
-        model.addAttribute("events", eventService.processCommand(command));
+        model.addAttribute("events", eventService.findByCriteria(command));
         return "event/list";
     }
 }

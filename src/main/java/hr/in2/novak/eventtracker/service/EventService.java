@@ -3,6 +3,7 @@ package hr.in2.novak.eventtracker.service;
 import hr.in2.novak.eventtracker.command.SearchCommand;
 import hr.in2.novak.eventtracker.model.Event;
 import hr.in2.novak.eventtracker.repository.EventRepository;
+import hr.in2.novak.eventtracker.repository.specification.EventSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,21 +38,7 @@ public class EventService {
         return eventRepository.findById(eventId);
     }
 
-    public List<Event> processCommand(SearchCommand command) {
-        List<Event> events;
-        if (command.getName() != null) {
-            events = eventRepository.findAllByNameContains(command.getName());
-        } else if (command.getFreeEntry() != null) {
-            events = eventRepository.findAllByFreeEntry(command.getFreeEntry());
-        } else if (command.getFromStartDate() != null) {
-            events = eventRepository.findAllByStartBetween(command.getFromStartDate(), command.getToStartDate());
-        } else if (command.getToStartDate() != null) {
-            events = eventRepository.findAllByEndBetween(command.getFromEndDate(), command.getToEndDate());
-        } else if (command.getSelectedOrg() != null) {
-            events = eventRepository.findAll();
-        } else {
-            events = findAll();
-        }
-        return events;
+    public List<Event> findByCriteria(SearchCommand command) {
+        return eventRepository.findAll(EventSpecification.findByCriteria(command));
     }
 }

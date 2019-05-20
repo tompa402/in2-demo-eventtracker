@@ -20,23 +20,6 @@
     });
 })(jQuery);
 
-$("#search-option").on('change', function () {
-    var formElements = ["name-div", "start-date-div", "end-date-div", "free-entry-div", "location-div"];
-    var selectedValue = $(this).find(':selected').val();
-    if (selectedValue === "") {
-        $("#searchForm").hide();
-    } else {
-        $("#searchForm").show();
-        $("#" + selectedValue).show();
-    }
-
-    formElements.forEach(function (value) {
-        if (value !== selectedValue) {
-            $("#" + value).hide();
-        }
-    });
-});
-
 $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
     // icons: {
     //     time: 'far fa-clock',

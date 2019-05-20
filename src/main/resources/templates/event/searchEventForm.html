@@ -8,6 +8,15 @@
     <link href="../static/css/style.css"
           th:href="@{~/css/style.css}" rel="stylesheet">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"
+          th:href="@{~/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.css}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+            th:src="@{~/webjars/momentjs/2.24.0/min/moment-with-locales.min.js}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"
+            th:src="@{~/webjars/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.js}"></script>
+
     <script src="../static/js/custom.js"
             th:src="@{~/js/custom.js}" defer></script>
 </head>
@@ -51,9 +60,9 @@
                                 <div id="start-date-div" class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="fromStartDate">From Start Date</label>
-                                        <input type="datetime-local" class="form-control" id="fromStartDate"
+                                        <input type="text" class="form-control datetimepicker-input" id="fromStartDate"
                                                placeholder="" value=""
-                                               th:field="*{fromStartDate}" required>
+                                               th:field="*{fromStartDate}" data-toggle="datetimepicker" data-target="#fromStartDate" required>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fromStartDate')}"
                                              th:errors="*{fromStartDate}">
                                             Valid event start date is required.
@@ -61,9 +70,9 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="toStartDate">To Start Date</label>
-                                        <input type="datetime-local" class="form-control" id="toStartDate"
+                                        <input type="text" class="form-control datetimepicker-input" id="toStartDate"
                                                placeholder="" value=""
-                                               th:field="*{toStartDate}" required>
+                                               th:field="*{toStartDate}" data-toggle="datetimepicker" data-target="#toStartDate" required>
                                         <div class="invalid-feedback">
                                             Valid event end date is required.
                                         </div>
@@ -73,9 +82,9 @@
                                 <div id="end-date-div" class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="fromEndDate">From End Date</label>
-                                        <input type="datetime-local" class="form-control" id="fromEndDate"
+                                        <input type="text" class="form-control datetimepicker-input" id="fromEndDate"
                                                placeholder="" value=""
-                                               th:field="*{fromEndDate}" required>
+                                               th:field="*{fromEndDate}" data-toggle="datetimepicker" data-target="#fromEndDate" required>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fromEndDate')}"
                                              th:errors="*{fromEndDate}">
                                             Valid event start date is required.
@@ -83,9 +92,9 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="toEndDate">To End Date</label>
-                                        <input type="datetime-local" class="form-control" id="toEndDate"
+                                        <input type="text" class="form-control datetimepicker-input" id="toEndDate"
                                                placeholder="" value=""
-                                               th:field="*{toEndDate}" required>
+                                               th:field="*{toEndDate}" data-toggle="datetimepicker" data-target="#toEndDate" required>
                                         <div class="invalid-feedback">
                                             Valid event end date is required.
                                         </div>
@@ -94,7 +103,7 @@
 
                                 <div id="free-entry-div" class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="freeEntry"
-                                           value="DA" th:field="*{freeEntry}">
+                                           th:value="'DA'" th:field="*{freeEntry}">
                                     <label class="custom-control-label" for="freeEntry">Slobodan ulaz?</label>
                                 </div>
 

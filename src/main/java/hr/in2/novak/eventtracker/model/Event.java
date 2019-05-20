@@ -23,11 +23,11 @@ public class Event extends BaseEntity {
     private String name;
 
     @NotNull(message = "Please enter start date of event")
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
+    @DateTimeFormat(pattern = "dd.MM.yyyy H:mm")
     @FutureOrPresent(message = "Start date can't be in past")
     private LocalDateTime start;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
+    @DateTimeFormat(pattern = "dd.MM.yyyy H:mm")
     @FutureOrPresent(message = "End date can't be in past")
     private LocalDateTime end;
 
