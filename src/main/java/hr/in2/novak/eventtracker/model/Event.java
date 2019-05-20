@@ -1,5 +1,6 @@
 package hr.in2.novak.eventtracker.model;
 
+import hr.in2.novak.eventtracker.util.ValidStartEndDate;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
+@ValidStartEndDate(startDate = "start", endDate = "end", message = "End date can't be before start date.")
 public class Event extends BaseEntity {
 
     @NotEmpty(message = "Please enter name of event")

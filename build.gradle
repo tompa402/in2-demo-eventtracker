@@ -38,6 +38,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	compile 'org.modelmapper:modelmapper:2.3.0'
+	compile 'commons-beanutils:commons-beanutils:1.9.3'
 	compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	compile 'org.webjars:webjars-locator-core:0.37'

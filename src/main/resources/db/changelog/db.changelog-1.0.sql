@@ -2,12 +2,12 @@
 
 --changeset novak:1
 CREATE TABLE org_unit_type(
-    id    IDENTITY,
+    id    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE organisation_unit(
-    id                IDENTITY,
+    id                int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     code              VARCHAR (16) UNIQUE NOT NULL,
     name              VARCHAR(64) NOT NULL,
     description       VARCHAR(512),
@@ -19,12 +19,12 @@ CREATE TABLE organisation_unit(
 );
 
 CREATE TABLE city_type(
-    id    IDENTITY,
+    id    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE city(
-    id            IDENTITY,
+    id            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     code          VARCHAR (16) NOT NULL,
     name          VARCHAR(64) NOT NULL,
     active        BIT NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE city(
 );
 
 CREATE TABLE event(
-    id          IDENTITY,
+    id          int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(128) NOT NULL,
     start       TIMESTAMP,
     end         TIMESTAMP,
@@ -50,18 +50,18 @@ CREATE TABLE event(
 );
 
 CREATE TABLE user (
- id         IDENTITY,
+ id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
  username   VARCHAR(32) NOT NULL,
  password   VARCHAR(128) NOT NULL,
  first_name VARCHAR(32),
  last_name  VARCHAR(32),
  enabled    BIT NOT NULL,
  created    TIMESTAMP,
- modified   TIMESTAMP,
+ modified   TIMESTAMP
 );
 
 CREATE TABLE role (
- id       IDENTITY,
+ id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
  name     VARCHAR(20) NOT NULL,
  created  TIMESTAMP NOT NULL,
  modified TIMESTAMP

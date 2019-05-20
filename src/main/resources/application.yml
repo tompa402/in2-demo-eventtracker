@@ -3,7 +3,12 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: default
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_example?serverTimezone=UTC
+    username: admin
+    password: admin
 
   liquibase:
     enabled: true
@@ -12,3 +17,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
